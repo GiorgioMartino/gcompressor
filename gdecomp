@@ -1,0 +1,76 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+from gcompress import lzw
+import sys
+import os
+
+helpmsg = "Usage: gdecomp [-v] [FILE]... " + \
+        "\nDecompress given file or directory using the LZW algorithm. " + \
+        "\n\n\tOptions:" + \
+        "\n\t  -r\t\tOperate recursively on FILE." + \
+        "\n\t  --help\tPrint this help." + \
+        "\n\nFILE has to be a .Z file or directory."
+
+
+#function in case of one args given. If path exists -> call lzw
+def two():
+    obj = []
+    if (os.path.exists(sys.argv[1])):
+        obj.append(sys.argv[1])
+        lzw.decompress(False,obj)
+    else:
+        print(helpmsg)
+
+
+
+
+def three_more():
+    r = False
+    args = sys.argv
+    max = len(args)
+    i = 1
+
+    if (args[1] == '-r'):
+        r = True
+        i = 2
+
+    # while(i < 2):                   #at least 2 options
+    #     if(args[i] == '-r'):
+    #         r = True
+    #     elif (args[i] == '-v'):
+    #         v = True
+    #     elif (os.path.exists(args[i])):
+    #         break
+    #     else:
+    #         print("Invalid option: {}".format(args[i]))
+    #         return
+    #     i += 1
+
+    obj = []                        #list of files or dir
+
+    while (i < len(args)):
+        if (os.path.exists(args[i])):
+            obj.append(args[i])
+        else:
+            print("File or directory not found: " + args[i])
+            return
+        i += 1
+
+    if(len(obj) == 0):
+        print("Nothing to decompress")
+    else:
+        lzw.decompress(r,obj)
+
+
+
+
+num = len(sys.argv)             #Number of args passed by shell.
+                                # 2 -> just file or dir, no options
+                                # 3 or more -> multiple options/files
+if (num > 2):
+    three_more()
+elif (num == 2):
+    two()
+else:
+    print(helpmsg)
