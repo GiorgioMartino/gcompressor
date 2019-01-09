@@ -2,8 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from gcompress import hash
-
+from gcompress import hash_struct
 def compress(r,v,obj):
     # print("Recursive: {}\t\tVerbose: {}\nComprimo:".format(r,v))
     # for i in obj:
@@ -11,7 +10,7 @@ def compress(r,v,obj):
 
     obj_type = []
     for i in range(0,len(obj)):
-        if(obj[i][-2:] == '.Z'):                     #check last two characters
+    if(obj[i][-2:] == '.Z'):                     #check last two characters
             print("{} cannot be compressed. Alredy done".format(i))
             return
         if(os.path.isfile(obj[i])):
@@ -22,9 +21,15 @@ def compress(r,v,obj):
             print('Only files and dir can be compressed')
             return
 
-    H = hash()
-    H.insert(-1,'a')
-    H.print_hash()
+    H = hash_struct.hash()          #new hash table
+    end = 256
+    for c in range(32,end):
+        H.insert(-1,chr(c),c)       #initialize with all ascii characters
+
+    H.insert(-1,'END',end)
+    # H.print_hash()
+
+
 
 
 

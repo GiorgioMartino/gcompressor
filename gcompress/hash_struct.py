@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 
-# diz = {(-1,'a'):65, (-2,'a'):67}
-# diz
-# diz [-1,'b'] = 3
+diz = {(-1,'a'):65, (-2,'a'):67}
+diz
+diz [-1,'b'] = 3
 
 class hash:
     '''Implements data structure (hash map), search function and insert
@@ -24,8 +24,8 @@ class hash:
             return -1
 
     def print_hash(self):
-        for i in self.__h:
-            print(i)
+        # for i in self.__h:
+        print(self.__h)
 
 
 # H = hash()
