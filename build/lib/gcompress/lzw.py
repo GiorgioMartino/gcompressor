@@ -1,10 +1,33 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import os
+from gcompress import hash
+import hash
+
 def compress(r,v,obj):
-    print("Recursive: {}\t\tVerbose: {}\nComprimo:".format(r,v))
-    for i in obj:
-        print(i)
+    # print("Recursive: {}\t\tVerbose: {}\nComprimo:".format(r,v))
+    # for i in obj:
+    #     print(i)
+
+    obj_type = []
+    for i in range(0,len(obj)):
+        if(obj[i][-2:] == '.Z'):                     #check last two characters
+            print("{} cannot be compressed. Alredy done".format(i))
+            return
+        if(os.path.isfile(obj[i])):
+            obj_type.append(0)                    # 0 -> file     1 -> dir
+        elif(os.path.isdir(obj[i])):
+            obj_type.append(1)
+        else:
+            print('Only files and dir can be compressed')
+            return
+
+    H = hash()
+    H.insert(-1,'a')
+    H.print_hash()
+
+
 
 def decompress(r,obj):
     for i in obj:
