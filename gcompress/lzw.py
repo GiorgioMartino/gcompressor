@@ -26,17 +26,6 @@ def compress(r,v,obj):
 
 
 
-#For every file in obj
-    # H = hash_struct.hash()          #new hash table
-    # end = 256
-    # for c in range(32,end):
-    #     H.insert(-1,chr(c),c)       #initialize with all ascii characters
-    #
-    # H.insert(-1,'END',end)
-    # H.print_hash()
-
-
-
 
 
 def decompress(r,obj):

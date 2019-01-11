@@ -1,19 +1,20 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 
-diz = {(-1,'a'):65, (-2,'a'):67}
-diz
-diz [-1,'b'] = 3
+# diz = {(-1,'a'):65, (-2,'a'):67}
+# diz
+# diz [-1,'b'] = 3
 
 class hash:
     '''Implements data structure (hash map), search function and insert
     function'''
-    def __init__(self):
-        self.__h = {}
+    def __init__(self,size):
+        self.__h = {(-1,chr(i)):i for i in range(size)}
+        # self.insert(-1,'END',size)
 
     def insert(self,p,x,c):
         '''Insert new node, after cheking it doesn't exists'''
-        if (self.search(p,x) == -1):
+        if (self.search(p,x) == None):
             self.__h[p,x] = c
 
     def search(self,p,x):
