@@ -17,11 +17,11 @@ class hash:
             self.__h[p,x] = c
 
     def search(self,p,x):
-        '''Search for a node father and label. If not found return -1'''
+        '''Search for a node father and label. If not found return None'''
         try:
             return self.__h[p,x]
         except KeyError:
-            return -1
+            return None
 
     def print_hash(self):
         # for i in self.__h:
