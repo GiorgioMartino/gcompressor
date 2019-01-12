@@ -5,6 +5,7 @@ from gcompress import hash_struct
 import os
 import stat
 import math
+import struct
 
 
 
@@ -31,7 +32,7 @@ def file_compress(f):
 
     p = -1
 
-    with open(f) as input, open(g,'w') as output:
+    with open(f) as input, open(g,'wb') as output:
         while True:
             x = input.read(1)
 #if EOF then exit
@@ -43,11 +44,11 @@ def file_compress(f):
                 p = q
 #Else write code on the file and add new sequence to dictionary
             else:
-                output.write("{0:b}".format(p))
+                output.write(struct.pack('h',p))
                 size += 1
                 H.insert(p,x,size)
                 p = H.search(-1,x)
-        output.write("{0:b}".format(p))
+        output.write(struct.pack('h',p))
         # output.write(str(end))
         input.close()
         output.close()

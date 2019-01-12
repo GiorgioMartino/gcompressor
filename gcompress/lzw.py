@@ -11,7 +11,8 @@ def compress(r,v,obj):
 
 #Check if all args aren't compressed yet, and if they are only files or dir
     for i in obj:
-        if(i[-2:] == '.Z'):                     #check last two characters
+ #check last two characters
+        if(i[-2:] == '.Z'):
             print('{} cannot be compressed. Alredy done'.format(i))
             return
         if(not os.path.isfile(i)) and (not os.path.isdir(i)):
