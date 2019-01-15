@@ -4,17 +4,7 @@
 from gcompress import hash_struct
 import os
 import stat
-import math
 import struct
-
-
-
-def lg(x):
-    if (x == 0):
-        return 1
-    else:
-        return math.log(x)
-
 
 
 def file_compress(f):
@@ -32,6 +22,7 @@ def file_compress(f):
 
     p = -1
 
+#Open file f in reading mode, file g in write binary mode
     with open(f) as input, open(g,'wb') as output:
         while True:
             x = input.read(1)
@@ -44,12 +35,20 @@ def file_compress(f):
                 p = q
 #Else write code on the file and add new sequence to dictionary
             else:
-                output.write(struct.pack('h',p))
+                if (int(p) > 255):
+                    n = output.write(struct.pack('H',p))
+                else:
+                    n = output.write(struct.pack('B',p))
+                print("N: {}, P: {}".format(n,p))
                 size += 1
                 H.insert(p,x,size)
                 p = H.search(-1,x)
-        output.write(struct.pack('h',p))
-        # output.write(str(end))
+#Write last char, then close both files
+        if (int(p) > 255):
+            n = output.write(struct.pack('H',p))
+        else:
+            n = output.write(struct.pack('B',p))  #Write END char
+        # output.write(struct.pack('h',end))
         input.close()
         output.close()
 
@@ -58,4 +57,6 @@ def file_compress(f):
 
 def dir(d):
 #Entro nella cartella e per ogni file chiamo file_compress()
+#Devo però ricordarmi di controllare che siano tutti file prima.
+#Una volta che inizio a comprimere devo poter arrivare fino alla fine
     pass

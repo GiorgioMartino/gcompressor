@@ -35,13 +35,20 @@ def file_compress(f):
                 p = q
 #Else write code on the file and add new sequence to dictionary
             else:
-                output.write(struct.pack('h',p))
+                if (int(p) > 255):
+                    n = output.write(struct.pack('H',p))
+                else:
+                    n = output.write(struct.pack('B',p))
+                # print("N: {}, P: {}".format(n,p))
                 size += 1
                 H.insert(p,x,size)
                 p = H.search(-1,x)
 #Write last char, then close both files
-        output.write(struct.pack('h',p))
-        # output.write(str(end))
+        if (int(p) > 255):
+            n = output.write(struct.pack('H',p))
+        else:
+            n = output.write(struct.pack('B',p))  #Write END char
+        # output.write(struct.pack('h',end))
         input.close()
         output.close()
 
