@@ -42,27 +42,34 @@ def file_compress(f,v):
             q = H.search(p,x)
 #If q is already in the dictionary, go deep and wait next char
             if (q != None):
+                # print("Before p = q -> {}".format(p))
                 p = q
+                # print("After p = q -> {}".format(p))
                 # print('q = {}, p = {}'.format(q,p))
 #Else write code on the file and add new sequence to dictionary
             else:
-                # if (p < 65536):
 
 #HANDLE THE ERROR WHERE P BECOMES NONE
                 if(p == None):
                     print("Error")
-                    print("{} char already read".format(c))
+                    print("{} value of c".format(c))
                     print("{} is last char".format(x))
-                    
 
 
+                # if (p < 65536):
                 output.write(struct.pack('H',p))
                 # else:
                 #     output.write(struct.pack('I',p))
                 # print('q = {}, p = {}'.format(q,p))
                 c += 1
                 H.insert(p,x,c)
+                # print("Before p = H.search -> {}".format(p))
                 p = H.search(-1,x)
+                if(p == None):
+                    c+=1
+                    H.insert(-1,x,c)
+                    p = c
+                # print("After p = H.search -> {}\nX = {}".format(p,x))
 #Write last char, then close both files
         # if (p < 65536):
         output.write(struct.pack('H',p))
@@ -73,6 +80,8 @@ def file_compress(f,v):
 #Write END char
         input.close()
         output.close()
+        # H.print_hash()
+
 
 #If verbose mode was specified print % of compression
     si, so = os.stat(f).st_size, os.stat(g).st_size
@@ -86,6 +95,7 @@ def file_compress(f,v):
     else:
         print("File {} compressed successfully\n".format(f))
 #Check if compressed file is smaller. If not don't compress
+
 
 
 

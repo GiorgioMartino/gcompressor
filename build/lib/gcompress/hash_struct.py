@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 
-# diz = {(-1,'a'):65, (-2,'a'):67
-# diz
+# diz = {(-1,'a'):65, (-2,'a'):67}
 # diz [-1,'b'] = 3
 # diz[-1,'b']
+# for i in diz:
+#     print(i)
 
 class hash:
     '''Implements data structure (hash map), search function and insert
