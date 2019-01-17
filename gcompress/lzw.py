@@ -21,9 +21,9 @@ def compress(r,v,obj):
 
     for i in obj:
         if(os.path.isfile(i)):
-            compression.file_compress(i)
+            compression.file_compress(i,v)
         else:
-            compression.dir(i)
+            compression.dir(i,v,r)
 
 
 
