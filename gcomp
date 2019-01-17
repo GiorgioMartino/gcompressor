@@ -33,8 +33,12 @@ def three_more():
     max = len(args)
     i = 1
 
-    while(i < 3):                   #at least 2 options
-        if(args[i] == '-r'):
+    while(i < 3):
+#at least 2 options
+        if (args[i] == '-vr' or args[i] == '-rv'):
+            r = True
+            v = True
+        elif(args[i] == '-r'):
             r = True
         elif (args[i] == '-v'):
             v = True

@@ -4,7 +4,6 @@
 from gcompress import hash_struct
 import os
 import stat
-import struct
 
 from inspect import currentframe, getframeinfo
 
@@ -35,7 +34,11 @@ def file_compress(f,v):
 #Open file f in reading mode, file g in write binary mode
     with open(f) as input, open(g,'wb') as output:
         while True:
-            x = input.read(1)
+            try:
+                x = input.read(1)
+            except:
+                print("File format not supported for compression.")
+                return
 #if EOF then exit
             if not x:
                 break;
@@ -56,10 +59,10 @@ def file_compress(f,v):
                     print("{} is last char".format(x))
 
 
-                # if (p < 65536):
-                output.write(struct.pack('H',p))
-                # else:
-                #     output.write(struct.pack('I',p))
+                if (len(bin(p)) <= 18):
+                    output.write(p.to_bytes(2,'big'))
+                else:
+                    output.write(p.to_bytes(3,'big'))
                 # print('q = {}, p = {}'.format(q,p))
                 c += 1
                 H.insert(p,x,c)
@@ -71,13 +74,11 @@ def file_compress(f,v):
                     p = c
                 # print("After p = H.search -> {}\nX = {}".format(p,x))
 #Write last char, then close both files
-        # if (p < 65536):
-        output.write(struct.pack('H',p))
-        output.write(struct.pack('H',256))
-        # else:
-        #     output.write(struct.pack('I',p))
-        #     output.write(struct.pack('I',256))
-#Write END char
+        if (len(bin(p)) <= 18):
+            output.write(p.to_bytes(2,'big'))
+        else:
+            output.write(p.to_bytes(3,'big'))
+
         input.close()
         output.close()
         # H.print_hash()
@@ -115,7 +116,7 @@ def dir(d,v,r):
 #Recursive option is true. For each item call respective function
     for i in os.listdir(d):
         print(i)
-        if(os.path.isfile(os.path.join(d,i))):
+        if(os.path.isfile(os.path.join(d,i)) and i[-2:] != '.Z'):
             file_compress(os.path.join(d,i),verbose)
         elif(os.path.isdir(os.path.join(d,i))):
             dir(os.path.join(d,i),verbose,recursive)
