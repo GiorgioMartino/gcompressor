@@ -10,9 +10,11 @@
 class hash:
     '''Implements data structure (hash map), search function and insert
     function'''
+
     def __init__(self,size):
+        '''Initialize dictionary with ascii codes'''
         self.__h = {(-1,chr(i)):i for i in range(size)}
-        self.insert(-1,'END',size)
+        # self.insert(-1,'END',size)
 
     def insert(self,p,x,c):
         '''Insert new node, after cheking it doesn't exists'''

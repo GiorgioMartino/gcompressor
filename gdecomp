@@ -5,7 +5,7 @@ from gcompress import lzw
 import sys
 import os
 
-helpmsg = "Usage: gdecomp [-v] [FILE]... " + \
+helpmsg = "Usage: gdecomp [-r] [FILE]... " + \
         "\nDecompress given file or directory using the LZW algorithm. " + \
         "\n\n\tOptions:" + \
         "\n\t  -r\t\tOperate recursively on FILE." + \
@@ -28,12 +28,11 @@ def two():
 def three_more():
     r = False
     args = sys.argv
-    max = len(args)
     i = 1
 
-    if (args[1] == '-r'):
+    if (args[i] == '-r'):
         r = True
-        i = 2
+        i += 1
 
     obj = []
 #list of files or dir
@@ -42,7 +41,7 @@ def three_more():
         if (os.path.exists(args[i])):
             obj.append(args[i])
         else:
-            print("File or directory not found: " + args[i])
+            print("Path not found: " + args[i])
             return
         i += 1
 

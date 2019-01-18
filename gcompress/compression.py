@@ -6,9 +6,6 @@ import os
 import stat
 
 
-
-
-
 def file_compress(f,v):
 #Create new file with .Z extension, set same permissions of the original
     verbose = v
@@ -68,7 +65,6 @@ def file_compress(f,v):
         input.close()
         output.close()
         # H.print_hash()
-
 
 #Size input file and output file
     si, so = os.stat(f).st_size, os.stat(g).st_size
