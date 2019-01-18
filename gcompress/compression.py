@@ -16,7 +16,9 @@ def file_compress(f,v):
 
 #Create and initialize the hash table with ascii characters
     c = 256
+    end = 256
     H = hash_struct.hash(c)
+    H.insert(-1,'END',end)
     # H.print_hash()
 
     p = -1
@@ -42,7 +44,7 @@ def file_compress(f,v):
                 p = q
 #Else write code on the file and add new sequence to dictionary
             else:
-                if (len(bin(p)) <= 18):
+                if (len(bin(c)) <= 18):
                     output.write(p.to_bytes(2,'big'))
                 else:
                     output.write(p.to_bytes(3,'big'))
@@ -52,15 +54,18 @@ def file_compress(f,v):
 
 #If p wasn't in the dictionary (special char) then add preventing crash
                 if(p == None):
-                    c+=1
+                    c += 1
                     H.insert(-1,x,c)
                     p = c
 
 #Write last char, then close both files
-        if (len(bin(p)) <= 18):
+
+        if (len(bin(c)) <= 18):
             output.write(p.to_bytes(2,'big'))
+            output.write(end.to_bytes(2,'big'))
         else:
             output.write(p.to_bytes(3,'big'))
+            output.write(end.to_bytes(3,'big'))
 
         input.close()
         output.close()

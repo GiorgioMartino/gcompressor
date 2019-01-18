@@ -29,10 +29,16 @@ class table:
             alpha += i
         return alpha
 
+    def print_table(self):
+        for i in range(len(self.__t)):
+            print(self.__t[i])
+
 
 # T = table(256)
+# T.insert(-1,'END')
+# T.print_table()
 # p = 65
 # T._table__t[p][1]
 # T.insert(65,'r')
 # a = T.text(256)
-# print(a) 
+# print(a)
