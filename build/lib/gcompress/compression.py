@@ -27,17 +27,17 @@ def file_compress(f,v):
 #Open file f in reading mode, file g in write binary mode
     with open(f) as input, open(g,'wb') as output:
         while True:
-#Try to read one char, if not in the dictionary abort
+#Try to read one char
             try:
                 x = input.read(1)
             except:
                 print('Encoding for char not supported.'.format(x))
                 os.remove(g)
                 return
-
+#Check if not EOF
             if not x:
                 break;
-
+#Check if char read is in the dictionary
             if(ord(x) > 255):
                 print('Encoding for char -{}- not supported.'.format(x))
                 os.remove(g)
