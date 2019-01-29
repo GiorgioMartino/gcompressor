@@ -1,11 +1,6 @@
 #!/usr/bin/env python3
 #-*- coding: utf-8 -*-
 
-# diz = {(-1,'a'):65, (-2,'a'):67}
-# diz [-1,'b'] = 3
-# diz[-1,'b']
-# for i in diz:
-#     print(i)
 
 class hash:
     '''Implements data structure (hash map), search function and insert
@@ -30,12 +25,3 @@ class hash:
     def print_hash(self):
         # for i in self.__h:
         print(self.__h)
-
-
-# H = hash()
-# H.insert(-1,'END',256)
-# H.insert(-1,'a',65)
-# H.insert(-1,'b',66)
-#
-# print(H.search(-1,'c'))
-# H.print_hash()

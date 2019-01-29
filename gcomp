@@ -5,6 +5,7 @@ from gcompress import lzw
 import sys
 import os
 
+#Message printed when --help or no options are given
 helpmsg = "Usage: gcomp [OPTIONS]... [FILE]... " + \
         "\nCompress given file or directory using the LZW algorithm. " + \
         "\n\n\tOptions:" + \
@@ -14,7 +15,7 @@ helpmsg = "Usage: gcomp [OPTIONS]... [FILE]... " + \
         "\n\nFILE has to be an uncompressed file or directory."
 
 
-#function in case of one args given. If path exists -> call lzw
+#Function in case of one args given. If path exists -> call lzw
 def two():
     obj = []
     if (os.path.exists(sys.argv[1])):
@@ -25,7 +26,7 @@ def two():
 
 
 
-
+#Three or more args. Before check options, then files and dir passed
 def three_more():
     r = False
     v = False
@@ -34,7 +35,7 @@ def three_more():
     i = 1
 
     while(i < 3):
-#at least 2 options
+#At least 2 options
         if (args[i] == '-vr' or args[i] == '-rv'):
             r = True
             v = True
@@ -49,7 +50,8 @@ def three_more():
             return
         i += 1
 
-    obj = []                        #list of files or dir
+#List of files or dir
+    obj = []
 
     while (i < len(args)):
         if (os.path.exists(args[i])):

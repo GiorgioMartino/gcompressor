@@ -11,9 +11,11 @@ class table:
         for i in range(size):
             self.__t.append((-1,chr(i)))
 
+
     def insert(self,p,x):
         '''Append new node to the list'''
         self.__t.append((p,x))
+
 
     def text(self,p):
         '''Return full text sequence'''
@@ -29,16 +31,7 @@ class table:
             alpha += i
         return alpha
 
+
     def print_table(self):
         for i in range(len(self.__t)):
             print(self.__t[i])
-
-
-# T = table(256)
-# T.insert(-1,'END')
-# T.print_table()
-# p = 65
-# T._table__t[p][1]
-# T.insert(65,'r')
-# a = T.text(256)
-# print(a)

@@ -13,7 +13,7 @@ def file_decompress(f):
     perm = stat.S_IMODE(os.lstat(f).st_mode)
     os.chmod(str(g),perm)
 
-#Create and initialize the table with ascii code
+#Create and initialize the table with latin-1 code
     c = 256
     end = 256
     T = table_struct.table(c)
@@ -31,6 +31,7 @@ def file_decompress(f):
         x = alpha[0]
 
         while True:
+#Read next seq with right size
             if (len(bin(c)) <= 18):
                 q = int.from_bytes(input.read(2), byteorder='big')
             else:
@@ -38,18 +39,23 @@ def file_decompress(f):
 
             c += 1
 
+#If q is not in the dict, add and write his value
             if (q >= c):
                 T.insert(p,x)
                 output.write(alpha+x)
+#Else look up for the entire sequence
             else:
                 alpha = T.text(q)
                 x = alpha[0]
+#If last char -> EOF
                 if (x == '€'):
                     break;
                 else:
                     T.insert(p,x)
                     output.write(alpha)
             p = q
+
+#Close both files
     input.close()
     output.close()
 

@@ -23,8 +23,6 @@ def compress(r,v,obj):
 
 
 
-
-
 def decompress(r,obj):
 #Check what can be passed to decompression, else print message
     for i in obj:

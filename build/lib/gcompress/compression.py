@@ -15,7 +15,7 @@ def file_compress(f,v):
     perm = stat.S_IMODE(os.lstat(f).st_mode)
     os.chmod(str(g),perm)
 
-#Create and initialize the hash table with ascii characters
+#Create and initialize the hash table with latin-1 characters
     c = 256
     end = 256
     H = hash_struct.hash(c)
@@ -31,7 +31,7 @@ def file_compress(f,v):
             try:
                 x = input.read(1)
             except:
-                print('Encoding for char not supported.'.format(x))
+                print('Encoding not supported.')
                 os.remove(g)
                 return
 #Check if not EOF
@@ -58,14 +58,12 @@ def file_compress(f,v):
                 H.insert(p,x,c)
                 p = H.search(-1,x)
 
-#If p wasn't in the dictionary (special char) then add preventing crash
+#If p wasn't in the dictionary prevent endless loop
                 if(p == None):
-                    c += 1
-                    H.insert(-1,x,c)
-                    p = c
+                    print('Error. p is null')
+                    return
 
 #Write last char, then close both files
-
         if (len(bin(c)) <= 18):
             output.write(p.to_bytes(2,'big'))
             output.write(end.to_bytes(2,'big'))
@@ -75,7 +73,6 @@ def file_compress(f,v):
 
         input.close()
         output.close()
-        # H.print_hash()
 
 #Size input file and output file
     si, so = os.stat(f).st_size, os.stat(g).st_size
@@ -105,8 +102,6 @@ def dir(d,v,r):
 
 #Recursive option is true. For each item call respective function
     for i in os.listdir(d):
-        # print(i)
-
 #If is file and is not already compressed
         if(os.path.isfile(os.path.join(d,i)) and i[-2:] != '.Z'):
             file_compress(os.path.join(d,i),verbose)

@@ -5,6 +5,7 @@ from gcompress import lzw
 import sys
 import os
 
+#Message printed when --help or no options are given
 helpmsg = "Usage: gdecomp [-r] [FILE]... " + \
         "\nDecompress given file or directory using the LZW algorithm. " + \
         "\n\n\tOptions:" + \
@@ -24,7 +25,7 @@ def two():
 
 
 
-
+#Three or more args. Before check option, then files and dir passed
 def three_more():
     r = False
     args = sys.argv
@@ -34,8 +35,8 @@ def three_more():
         r = True
         i += 1
 
+#List of files or dir
     obj = []
-#list of files or dir
 
     while (i < len(args)):
         if (os.path.exists(args[i])):
