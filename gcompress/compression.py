@@ -31,7 +31,7 @@ def file_compress(f,v):
             try:
                 x = input.read(1)
             except:
-                print('Encoding not supported.')
+                print('Encoding not supported for file {}\n'.format(f))
                 os.remove(g)
                 return
 #Check if not EOF
@@ -52,8 +52,11 @@ def file_compress(f,v):
             else:
                 if (len(bin(c)) <= 18):
                     output.write(p.to_bytes(2,'big'))
-                else:
+                elif (len(bin(c)) <= 26):
                     output.write(p.to_bytes(3,'big'))
+                else:
+                    output.write(p.to_bytes(4,'big'))
+
                 c += 1
                 H.insert(p,x,c)
                 p = H.search(-1,x)
@@ -67,9 +70,12 @@ def file_compress(f,v):
         if (len(bin(c)) <= 18):
             output.write(p.to_bytes(2,'big'))
             output.write(end.to_bytes(2,'big'))
-        else:
+        elif (len(bin(c)) <= 26):
             output.write(p.to_bytes(3,'big'))
             output.write(end.to_bytes(3,'big'))
+        else:
+            output.write(p.to_bytes(4,'big'))
+            output.write(end.to_bytes(4,'big'))
 
         input.close()
         output.close()
@@ -77,15 +83,18 @@ def file_compress(f,v):
 #Size input file and output file
     si, so = os.stat(f).st_size, os.stat(g).st_size
 
-#If compressed is bigger remove, else print message
+#If compressed is bigger remove g, else print message and remove f
     if (si < so):
         os.remove(g)
         print("Compression on file {} does not reduce his size\n".format(f))
+        return
     elif (verbose):
         perc = (so/si)*100
         print("Compression achived for file {}: {:.2f}%\n".format(f,100-perc))
     else:
         print("File {} compressed successfully\n".format(f))
+
+    os.remove(f)
 
 
 

@@ -8,7 +8,7 @@ import stat
 
 def file_decompress(f):
 #Create file g without .Z extension, set same permissions
-    g = ''+f[:-2]+'.D'
+    g = ''+f[:-2]
     open(g,'a').close
     perm = stat.S_IMODE(os.lstat(f).st_mode)
     os.chmod(str(g),perm)
@@ -34,8 +34,10 @@ def file_decompress(f):
 #Read next seq with right size
             if (len(bin(c)) <= 18):
                 q = int.from_bytes(input.read(2), byteorder='big')
-            else:
+            elif (len(bin(c)) <= 26):
                 q = int.from_bytes(input.read(3), byteorder='big')
+            else:
+                q = int.from_bytes(input.read(4), byteorder='big')
 
             c += 1
 
@@ -59,9 +61,28 @@ def file_decompress(f):
     input.close()
     output.close()
 
+    print("File {} decompressed successfully\n".format(f))
+    os.remove(f)
+
 
 
 
 
 def dir(d,r):
-    pass
+    recursive = r
+
+#If -r not specified -> error
+    if (not recursive):
+        print("Cannot decompress directories. Type --help for [-r] option\n")
+        return
+
+#Recursive is true. For each object call the right function
+    for i in os.listdir(d):
+#If i is a compressed file
+        if(os.path.isfile(os.path.join(d,i)) and i[-2:] == '.Z'):
+            file_decompress(os.path.join(d,i))
+#If i is a directory
+        elif(os.path.isdir(os.path.join(d,i))):
+            dir(os.path.join(d,i), recursive)
+        else:
+            print("Cannot decompress {} because it's not compressed\n".format(i))
