@@ -13,7 +13,7 @@ $ sudo apt-get install python3
 $ git clone [https://github.com/GiorgioMartino/gcompressor](https://github.com/GiorgioMartino/gcompressor)
 ```
 Or just hit the link and click download.
-###Installing
+### Installing
 Just go into the directory `gcompress` and run the following instructions.
 ```
 $ python3 setup.py sdist
@@ -24,5 +24,5 @@ $ python3 setup.py install
 ```
 ## Running
 Now you are able to compress and decompress, `gcomp` and `gdecomp` are now part of your system.
-##Author
+## Author
 **Giorgio Martino** see GitHub [account](https://github.com/GiorgioMartino)
