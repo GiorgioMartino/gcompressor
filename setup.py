@@ -2,6 +2,7 @@
 
 from distutils.core import setup
 import os
+import sys
 
 setup(name='gcompress',
       version='1.0',
@@ -15,3 +16,6 @@ setup(name='gcompress',
 
 os.system("sudo cp ~/Università/compressor/gcomp /bin")
 os.system("sudo cp ~/Università/compressor/gdecomp /bin")
+
+if (sys.argv[1] == 'install'):
+    print('\n\n\nGCOMPRESS INSTALLED SUCCESSFULLY\n\n\n')
