@@ -13,8 +13,8 @@ setup(name='gcompress',
       packages=['gcompress'],
      )
 
-os.system("sudo cp ~/Università/compressor/gcomp /bin")
-os.system("sudo cp ~/Università/compressor/gdecomp /bin")
+os.system("sudo cp gcomp /bin")
+os.system("sudo cp gdecomp /bin")
 
 if (sys.argv[1] == 'install'):
     print('\n\nGCOMPRESS Package installed successfully.' +
