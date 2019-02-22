@@ -62,9 +62,9 @@ def file_compress(f,v):
                 p = H.search(-1,x)
 
 #If p wasn't in the dictionary prevent endless loop
-                if(p == None):
-                    print('Error. p is null')
-                    return
+                # if(p == None):
+                #     print('Error. p is null')
+                #     return
 
 #Write last char, then close both files
         if (len(bin(c)) <= 18):
@@ -86,13 +86,13 @@ def file_compress(f,v):
 #If compressed is bigger remove g, else print message and remove f
     if (si < so):
         os.remove(g)
-        print("Compression on file {} does not reduce his size\n".format(f))
+        print("Compression on file {} does not reduce his size.\n".format(f))
         return
     elif (verbose):
         perc = (so/si)*100
         print("Compression achived for file {}: {:.2f}%\n".format(f,100-perc))
     else:
-        print("File {} compressed successfully\n".format(f))
+        print("File {} compressed successfully.\n".format(f))
 
     os.remove(f)
 
@@ -106,7 +106,7 @@ def dir(d,v,r):
 
 #If -r not specified -> error
     if (not recursive):
-        print("Cannot compress directories. Type --help for [-r] option\n")
+        print("Cannot compress directories. Type --help for [-r] option.\n")
         return
 
 #Recursive option is true. For each item call respective function
@@ -118,4 +118,4 @@ def dir(d,v,r):
         elif(os.path.isdir(os.path.join(d,i))):
             dir(os.path.join(d,i),verbose,recursive)
         else:
-            print("{} is not suitable for compression. See --help\n".format(i))
+            print("{} is not suitable for compression. See --help.\n".format(i))

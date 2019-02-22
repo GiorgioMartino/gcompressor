@@ -47,7 +47,7 @@ def three_more():
         i += 1
 
     if(len(obj) == 0):
-        print("Nothing to decompress")
+        print("Nothing to decompress.")
     else:
         lzw.decompress(r,obj)
 

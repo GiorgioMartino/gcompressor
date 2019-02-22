@@ -13,10 +13,13 @@ def compress(r,v,obj):
             print('{} cannot be compressed. Alredy done'.format(i))
             break
         if(not os.path.isfile(i)) and (not os.path.isdir(i)):
-            print('Only files and dir can be compressed')
+            print('Only files and dir can be compressed.')
             break
         elif(os.path.isfile(i)):
-            compression.file_compress(i,v)
+            if(os.stat(i).st_size > 0):
+                compression.file_compress(i,v)
+            else:
+                print('File with size 0 cannot be compressed.')
         else:
             compression.dir(i,v,r)
 

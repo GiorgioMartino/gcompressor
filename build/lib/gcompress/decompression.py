@@ -73,7 +73,7 @@ def dir(d,r):
 
 #If -r not specified -> error
     if (not recursive):
-        print("Cannot decompress directories. Type --help for [-r] option\n")
+        print("Cannot decompress directories. Type --help for [-r] option.\n")
         return
 
 #Recursive is true. For each object call the right function
@@ -85,4 +85,4 @@ def dir(d,r):
         elif(os.path.isdir(os.path.join(d,i))):
             dir(os.path.join(d,i), recursive)
         else:
-            print("Cannot decompress {} because it's not compressed\n".format(i))
+            print("Cannot decompress {} because it's not compressed.\n".format(i))
